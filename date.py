@@ -16,35 +16,50 @@ def Notification(B_day,C_day):
 		return (str(C_day.month - B_day.month) +" Months Ago")
 
 	else:
-		b=B_day.day
-		c=C_day.day
-		if(b-c == 7):
-			return("Next Sunday")
-
-		elif((b-c==6) or (b-c==5) or (b-c==4) or (b-c==3)):
-			return ("Coming Sunday")
-
-		elif(b-c == 2):
-			return("Day after Tomorrow")
-
-		elif(b-c == 1):
-			return("Tomorrow")
+		bday=B_day.day
+		cday=C_day.day
 		
-		elif((c-b==6) or (c-b==5) or (c-b==4) or (c-b==3)):
-			return(str(c-b) +" days before")
+		conditions = {
+		'cond1':eval('bday-cday == 7'),
+		'cond2':eval('(bday-cday) in [6,5,4,3]'),
+		'cond3':eval('bday-cday == 2'),	
+		'cond4':eval('bday-cday == 1'),
+		'cond5':eval('(cday-bday) in [6,5,4,3]'),	
+		'cond6':eval('cday-bday == 1'),	
+		'cond7':eval('cday-bday == 2'),	
+		'cond8':eval('cday-bday == 7'),
+		'cond9':eval('bday-cday == 14'),
+		'cond10':eval('(bday-cday) in [8,9,10,11,12,13]'),
+		'cond11':eval('(cday-bday) in[8,9,10,11,12,13]'),
+		'cond12':eval('(cday-bday) in [14,15,16,17,18,19,20]'),
+		}	
 
-		elif(c-b == 7):
-			return("Last Sunday")
-
-
-		elif(c-b == 2):
+		if conditions['cond1']:
+			return("Next Sunday")
+		elif(conditions['cond2']):
+			return ("Coming Sunday")
+		elif(conditions['cond3']):
+			return("Day after Tomorrow")
+		elif conditions['cond4']:
+			return("Tomorrow")
+		elif(conditions['cond5']):
+			return(str(cday-bday) +" days before")
+		elif(conditions['cond6']):
+			return("Yesterday")	
+		elif(conditions['cond7']):
 			return("Day before Yesterday")
-
-		elif(c-b == 1):
-			return("Yesterday")
+		elif(conditions['cond8']):
+			return("Last Sunday")
+		elif(conditions['cond9']):
+			return("2 weeks from now")
+		elif(conditions['cond10']):
+			return("Next Sunday")
+		elif(conditions['cond11']):
+			return("In the last week")
+		elif(conditions['cond12']):
+			return("2 weeks ago")
 		else:
-			return("Today")
-
+			return("Today")		
 
 def Date_info(date):
 	Birth_date=datetime.date(1995,3,15)
