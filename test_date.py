@@ -1,10 +1,24 @@
 import pytest
 from date import Date_info
 
-easy_test_cases =[("12-01-2020","2 Months from Now"),("20-05-2020","2 Months Ago"),("15-06-2020","3 Months Ago"),("25-07-2020","4 Months Ago"),("29-08-2020","5 Months Ago"),("02-09-2020","6 Months Ago"),("05-10-2020","7 Months Ago"),("30-11-2020","8 Months Ago"),("30-12-2020","9 Months Ago")]
+with open ("easy_test_cases.txt",mode='r') as case1file:
+		res1= [tuple(line.strip().split(","))for line in case1file]
+
+with open ("nearby_test_cases.txt",mode='r') as case2file:
+		res2= [tuple(line.strip().split(","))for line in case2file]
 
 
-@pytest.mark.parametrize('date,exp',easy_test_cases)
-def test_Birthday(date,exp):
+@pytest.mark.parametrize('date,exp',res1)
+def test_easy_case(date,exp):
 	act=Date_info(date)
 	assert act==exp
+
+
+@pytest.mark.parametrize('date,exp',res2)
+def test_nearby_dates(date,exp):
+	act=Date_info(date)
+	assert act==exp
+
+
+
+
