@@ -12,54 +12,51 @@ def Notification(B_day,C_day):
 	if(B_day.month > C_day.month):
 		return  (str(B_day.month - C_day.month)+" Months from Now")
 
-	elif(B_day.month < C_day.month): 
+	elif((B_day.month - C_day.month)< -1 ): 
 		return (str(C_day.month - B_day.month) +" Months Ago")
 
 	else:
-		bday=B_day.day
-		cday=C_day.day
-		
-		conditions = {
-		'cond1':eval('bday-cday == 7'),
-		'cond2':eval('(bday-cday) in [6,5,4,3]'),
-		'cond3':eval('bday-cday == 2'),	
-		'cond4':eval('bday-cday == 1'),
-		'cond5':eval('(cday-bday) in [6,5,4,3]'),	
-		'cond6':eval('cday-bday == 1'),	
-		'cond7':eval('cday-bday == 2'),	
-		'cond8':eval('cday-bday == 7'),
-		'cond9':eval('bday-cday == 14'),
-		'cond10':eval('(bday-cday) in [8,9,10,11,12,13]'),
-		'cond11':eval('(cday-bday) in[8,9,10,11,12,13]'),
-		'cond12':eval('(cday-bday) in [14,15,16,17,18,19,20]'),
-		}	
+		if(B_day.month == C_day.month):
+			bday=B_day.day
+			cday=C_day.day
+			conditions1={   0 : "Today",
+					7 : "Next Sunday",
+			  		1 : "Tomorrow",
+					2:"Day after Tomorrow",
+					14:"2 weeks from now",
+					-1:"Yesterday",
+					-2:"Day before Yesterday",
+					-7:"Last Sunday",
+					}
+			for key in range(3,7):
+				conditions1[key] = "Coming Sunday"
+			for key in range(-6,-2): 
+				conditions1[key] = str(cday-bday) +" days before"
+			for key in range(8,14):
+				conditions1[key] = "Next Sunday"
+			for key in range(-13,-7):
+				conditions1[key] = "In the last week"
+			for key in range(-16,-13):
+				conditions1[key] = "2 weeks ago"
 
-		if conditions['cond1']:
-			return("Next Sunday")
-		elif(conditions['cond2']):
-			return ("Coming Sunday")
-		elif(conditions['cond3']):
-			return("Day after Tomorrow")
-		elif conditions['cond4']:
-			return("Tomorrow")
-		elif(conditions['cond5']):
-			return(str(cday-bday) +" days before")
-		elif(conditions['cond6']):
-			return("Yesterday")	
-		elif(conditions['cond7']):
-			return("Day before Yesterday")
-		elif(conditions['cond8']):
-			return("Last Sunday")
-		elif(conditions['cond9']):
-			return("2 weeks from now")
-		elif(conditions['cond10']):
-			return("Next Sunday")
-		elif(conditions['cond11']):
-			return("In the last week")
-		elif(conditions['cond12']):
-			return("2 weeks ago")
+			return (conditions1[bday-cday])
+		
 		else:
-			return("Today")		
+			bday=B_day.day
+			cday=C_day.day+31
+			conditions2={}
+			for key in range(17,21): 
+				conditions2[key] = "2 weeks ago"
+			for key in range(21,28):
+				conditions2[key] = "3 weeks ago"
+			for key in range(28,31):
+				conditions2[key] = "Almost a month ago"
+			for key in range(31,62):
+				conditions2[key] = "Last month"
+			
+			return(conditions2[cday-bday])
+
+
 
 def Date_info(date):
 	Birth_date=datetime.date(1995,3,15)
@@ -76,3 +73,4 @@ def Date_info(date):
 if __name__ == "__main__":
 	dates=input("Enter the date: ")
 	Date_info(dates)
+
