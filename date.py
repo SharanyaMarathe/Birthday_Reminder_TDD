@@ -7,6 +7,52 @@ def Birth_Date_info(B_date):
 	month=dates_detail.strftime("%B")
 	return day,month
 
+def Current_date_info(C_date):
+	Current_date=C_date.split("-")
+	C_dates_detail=datetime.date(int(2020),int(Current_date[1]),int(Current_date[0]))
+	C_day=C_dates_detail.strftime("%A")
+	return C_dates_detail,C_day
+	
+
+def condition_for_same_month(b_day,c_day):
+	conditions1={   0 : "Today",
+			7 : "Next Sunday",
+			1 : "Tomorrow",
+			2:"Day after Tomorrow",
+			14:"2 weeks from now",
+			-1:"Yesterday",
+			-2:"Day before Yesterday",
+			-7:"Last Sunday",
+			}
+	for key in range(3,7):
+		conditions1[key] = "Coming Sunday"
+	for key in range(-6,-2): 
+		conditions1[key] = str(c_day-b_day) +" days before"
+	for key in range(8,14):
+		conditions1[key] = "Next Sunday"
+	for key in range(-13,-7):
+		conditions1[key] = "In the last week"
+	for key in range(-16,-13):
+		conditions1[key] = "2 weeks ago"
+
+	return (conditions1[b_day-c_day])
+
+
+
+def condition_for_previous_month(b_day,c_day):
+	conditions2={}
+	for key in range(17,21): 
+		conditions2[key] = "2 weeks ago"
+	for key in range(21,28):
+		conditions2[key] = "3 weeks ago"
+	for key in range(28,31):
+		conditions2[key] = "Almost a month ago"
+	for key in range(31,62):
+		conditions2[key] = "Last month"
+			
+	return (conditions2[c_day-b_day])
+
+
 
 def Notification(B_day,C_day):
 	if(B_day.month > C_day.month):
@@ -16,57 +62,22 @@ def Notification(B_day,C_day):
 		return (str(C_day.month - B_day.month) +" Months Ago")
 
 	else:
+		birth_day=B_day.day
+		current_day=C_day.day
 		if(B_day.month == C_day.month):
-			bday=B_day.day
-			cday=C_day.day
-			conditions1={   0 : "Today",
-					7 : "Next Sunday",
-			  		1 : "Tomorrow",
-					2:"Day after Tomorrow",
-					14:"2 weeks from now",
-					-1:"Yesterday",
-					-2:"Day before Yesterday",
-					-7:"Last Sunday",
-					}
-			for key in range(3,7):
-				conditions1[key] = "Coming Sunday"
-			for key in range(-6,-2): 
-				conditions1[key] = str(cday-bday) +" days before"
-			for key in range(8,14):
-				conditions1[key] = "Next Sunday"
-			for key in range(-13,-7):
-				conditions1[key] = "In the last week"
-			for key in range(-16,-13):
-				conditions1[key] = "2 weeks ago"
-
-			return (conditions1[bday-cday])
-		
+			return condition_for_same_month(birth_day,current_day)
 		else:
-			bday=B_day.day
-			cday=C_day.day+31
-			conditions2={}
-			for key in range(17,21): 
-				conditions2[key] = "2 weeks ago"
-			for key in range(21,28):
-				conditions2[key] = "3 weeks ago"
-			for key in range(28,31):
-				conditions2[key] = "Almost a month ago"
-			for key in range(31,62):
-				conditions2[key] = "Last month"
+			return condition_for_previous_month(birth_day,current_day+31)
+
 			
-			return(conditions2[cday-bday])
-
-
 
 def Date_info(date):
 	Birth_date=datetime.date(1995,3,15)
 	Birth_day=Birth_Date_info(Birth_date)
-	dates=date.split("-")
-	dates_detail=datetime.date(int(2020),int(dates[1]),int(dates[0]))
-	day=dates_detail.strftime("%A")
-	notify=Notification(Birth_date,dates_detail)
+	Current_date = Current_date_info(date)
+	notify=Notification(Birth_date,Current_date[0])
 	#return ("On "+day+","+ dates[0],dates_detail.strftime("%B"))
-	print(dates_detail," ",day," ",notify,"  ||  ","On ",Birth_day[0],", ",Birth_date.day,"th of",Birth_day[1])
+	print(Current_date[0]," ",Current_date[1]," ",notify,"  ||  ","On ",Birth_day[0],", ",Birth_date.day,"th of",Birth_day[1])
 	return notify
 
 
