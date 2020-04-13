@@ -1,0 +1,50 @@
+﻿APP Design:
+
+1.Birthday reminder and Subscription reminder date both are 15-03-2020,
+2. Take current date as input from the user in format dd-mm-yyyy.
+3. Date and Month of the Birthday is significant for the  for birthday notification.All date,month and year is required for subscription    	reminder.Save the input in date format.
+4. Using Datetime Module
+        3.1 Fetch current date and day.
+        3.2 Fetch day and month from the birthday date.
+	3.3Fetch date,month and year from subscription date.
+4. Notification Message:
+        4.1 If the current month is same as birthday month : Calculate the days.
+                     4.1.1   If the difference between Birthday and Current date is Positive : Print ‘Number of  days’ from now.
+                     4.1.2   If the difference between Birthday and Current date is Negative : Print ‘Number of  days’ Ago.
+
+        This same functionality can be used to remind about the subscription (1st January 2020 to 31st March 2020)
+                     -> If the months are different, print the month and days remaining or month and days to go.
+
+
+
+        4.2 If the current month and  birthday month are different : Calculate the month
+                     4.2.1   If the difference between Birthday month and Current Month is Positive : Print ‘Number of  months’ from now.
+ 	         4.2.2   If the difference between Birthday month and Current month is Negative : Print ‘Number of months’ Ago.
+
+        This same functionality can be used to remind about the subscription (From April 1st 2020 onwards)
+                     -> Consider the notification is for 15-03-2021 subscription, calculate the month gap and print the notification.
+
+5.Print Current date(input), day and notification according to The current date Along the day and month of the birthday(which is fixed).
+  Print Current date(input), day and notification according to The current date Along the day and month of the Subscription(which is fixed).
+
+Test cases:
+<-->Birthday Reminder App<--> 
+
+1. This Month  :  All dates of the birthday month.(Boundary values and nearby dates are important).
+2. Birthday : Test case on the same day as birthday. 
+3. Easy Test cases : Some dates from different months (January to December)
+4. Previous Month : Test cases for next month of the given birthday month.
+
+Test cases:
+<-->Subscription Reminder App<--> 
+
+1. Easy Month  :  Some dates from April to December 2020.
+2. Subscribe : Test case on the same day as Subscribed. 
+3. Next year cases : Some dates from month january to march 2021.
+4. Previous Months : Some dates from the month january to march 2020.
+
+Modifications in Birthday Reminder app so that it can work for the subscription reminder app:
+1. After the month of the subscription date, notification should refer to next year subscription date.
+2. If the current date is same as as subscription date(given) , then also notification should refer to next year date.
+3. The months January-February calculation of months with notification "number of months from now".
+4. The month March has 2 case 1. Before the subscription date.."number of days from now", after the date..."number of days ago(due date)"
