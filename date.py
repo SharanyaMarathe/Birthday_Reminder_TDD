@@ -1,5 +1,36 @@
 import datetime
 
+conditions1={   0 : "Today",
+			7 : "Next Sunday",
+			1 : "Tomorrow",
+			2:"Day after Tomorrow",
+			14:"2 weeks from now",
+			-1:"Yesterday",
+			-2:"Day before Yesterday",
+			-7:"Last Sunday",
+			}
+for key in range(3,7):
+	conditions1[key] = "Coming Sunday"
+for key in range(-6,-2): 
+	conditions1[key] = str((-1*key)) +" days before"
+for key in range(8,14):
+	conditions1[key] = "Next Sunday"
+for key in range(-13,-7):
+	conditions1[key] = "In the last week"
+for key in range(-16,-13):
+	conditions1[key] = "2 weeks ago"
+
+conditions2={}
+for key in range(17,21): 
+	conditions2[key] = "2 weeks ago"
+for key in range(21,28):
+	conditions2[key] = "3 weeks ago"
+for key in range(28,31):
+	conditions2[key] = "Almost a month ago"
+for key in range(31,62):
+	conditions2[key] = "Last month"
+
+
 def Birth_Date_info(B_date):
 	
 	dates_detail=datetime.date(int(2020),int(B_date.month),int(B_date.day))
@@ -15,41 +46,11 @@ def Current_date_info(C_date):
 	
 
 def condition_for_same_month(b_day,c_day):
-	conditions1={   0 : "Today",
-			7 : "Next Sunday",
-			1 : "Tomorrow",
-			2:"Day after Tomorrow",
-			14:"2 weeks from now",
-			-1:"Yesterday",
-			-2:"Day before Yesterday",
-			-7:"Last Sunday",
-			}
-	for key in range(3,7):
-		conditions1[key] = "Coming Sunday"
-	for key in range(-6,-2): 
-		conditions1[key] = str(c_day-b_day) +" days before"
-	for key in range(8,14):
-		conditions1[key] = "Next Sunday"
-	for key in range(-13,-7):
-		conditions1[key] = "In the last week"
-	for key in range(-16,-13):
-		conditions1[key] = "2 weeks ago"
-
+	
 	return (conditions1[b_day-c_day])
 
-
-
 def condition_for_previous_month(b_day,c_day):
-	conditions2={}
-	for key in range(17,21): 
-		conditions2[key] = "2 weeks ago"
-	for key in range(21,28):
-		conditions2[key] = "3 weeks ago"
-	for key in range(28,31):
-		conditions2[key] = "Almost a month ago"
-	for key in range(31,62):
-		conditions2[key] = "Last month"
-			
+				
 	return (conditions2[c_day-b_day])
 
 
