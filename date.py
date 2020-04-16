@@ -37,6 +37,8 @@ def newkeys_conditions2(conditions2):
 		conditions2[key] = "Last month"
 	return conditions2
 
+newkeys_conditions1(conditions1)
+newkeys_conditions2(conditions2)
 
 def Birth_Date_info(B_date):
 	B_date=B_date.split("-")
@@ -53,13 +55,13 @@ def Current_date_info(C_date):
 	
 
 def condition_for_same_month(b_day,c_day):
-		newkeys_conditions1(conditions1)
+		
 		return (conditions1[b_day-c_day])
 
 
 
 def condition_for_previous_month(b_day,c_day):	
-		newkeys_conditions2(conditions2)	
+			
 		return (conditions2[c_day-b_day])
 
 
