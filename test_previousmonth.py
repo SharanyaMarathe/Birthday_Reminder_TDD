@@ -6,5 +6,5 @@ with open ("previousmonth_test_cases.txt",mode='r') as casefile:
 
 @pytest.mark.parametrize('date,exp',res)
 def test_nearby_dates(date,exp):
-	act=Date_info(date)
+	act=Date_info(date,'15-03-1955')
 	assert act==exp
