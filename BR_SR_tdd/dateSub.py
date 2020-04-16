@@ -37,13 +37,15 @@ def newkeys_conditions2(conditions2):
 		conditions2[key] = "Last month"
 	return conditions2
 
-
+newkeys_conditions1(conditions1)
+newkeys_conditions2(conditions2)
 def Birth_Date_info(B_date):
-	
-	dates_detail=datetime.date(int(2020),int(B_date.month),int(B_date.day))
+
+	B_date=B_date.split("-")
+	dates_detail=datetime.date(int(2020),int(B_date[1]),int(B_date[0]))
 	day=dates_detail.strftime("%A")
 	month=dates_detail.strftime("%B")
-	return day,month
+	return day,month,dates_detail
 
 def Current_date_info(C_date):
 	Current_date=C_date.split("-")
@@ -53,13 +55,13 @@ def Current_date_info(C_date):
 	
 
 def condition_for_same_month(b_day,c_day):
-		newkeys_conditions1(conditions1)
+		
 		return (conditions1[b_day-c_day])
 
 
 
 def condition_for_previous_month(b_day,c_day):	
-		newkeys_conditions2(conditions2)	
+			
 		return (conditions2[c_day-b_day])
 
 
@@ -81,19 +83,24 @@ def Notification(B_day,C_day):
 
 			
 
-def Date_info(date):
-	Birth_date=datetime.date(1995,3,15)
-	Birth_day=Birth_Date_info(Birth_date)
+def Date_info(date,date_birth):
+	
+	Birth_day=Birth_Date_info(date_birth)
 	Current_date = Current_date_info(date)
-	Birthday_notify=Notification(Birth_date,Current_date[0])
+	Birthday_notify=Notification(Birth_day[2],Current_date[0])
 	#return ("On "+day+","+ dates[0],dates_detail.strftime("%B"))
-	print("Birthday : ",Current_date[0]," ",Current_date[1]," ",Birthday_notify,"  ||  ","On ",Birth_day[0],", ",Birth_date.day,"th of",Birth_day[1])#collecting subscription information and giving results
-	Subscribe_date=datetime.date(2020,3,15)
+	print("Birthday : ",Current_date[0]," ",Current_date[1]," ",Birthday_notify,"  ||  ","On ",Birth_day[0],", ",Birth_day[2].day,"th of",Birth_day[1])#collecting subscription information and giving results
+	'''Subscribe_date=date
 	Subscribe_day=Birth_Date_info(Subscribe_date)
 	Current_date = Current_date_info(date)
-	Subscribe_notify=Notification(Current_date[0],Birth_date)
-	sub_notify=str(12-int(Subscribe_notify[0]))+" Months from Now"
-	print("Subscription",Current_date[0]," ",Current_date[1]," ",sub_notify,"  ||  ","On ",Birth_day[0],", ",Birth_date.day,"th of",Birth_day[1])
+	Subscribe_notify=Notification(Subscribe_day[2],Current_date[0])'''
+
+	try:
+		sub_notify=str(12-int(Birthday_notify[0]))+" Months from Now"
+	except ValueError as err:
+		sub_notify="11 Months from Now"
+	
+	print("Subscription",Current_date[0]," ",Current_date[1]," ",sub_notify,"  ||  ","On ",Birth_day[0],", ",Birth_day[2].day,"th of",Birth_day[1])
 	return Birthday_notify,sub_notify
 	
 	
@@ -101,6 +108,8 @@ def Date_info(date):
 
 if __name__ == "__main__":
 	dates=input("Enter the date: ")
-	Date_info(dates)
+	date_birth=input("Enter the birth date: ")
+	Date_info(dates,date_birth)
+
 
 
