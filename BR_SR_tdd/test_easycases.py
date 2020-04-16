@@ -7,5 +7,5 @@ with open ("easymonth_test_cases.txt",mode='r') as casefile:
 
 @pytest.mark.parametrize('date,exp',res)
 def test_easy_cases(date,exp):
-	act=Date_info(date)[1]
+	act=Date_info(date,'15-03-2020')[1]
 	assert act==exp
