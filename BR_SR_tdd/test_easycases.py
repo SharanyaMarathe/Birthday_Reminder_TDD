@@ -1,5 +1,5 @@
 import pytest
-from date import Date_info
+from dateSub import Date_info
 
 with open ("easymonth_test_cases.txt",mode='r') as casefile:
 		res= [tuple(line.strip().split(","))for line in casefile]
