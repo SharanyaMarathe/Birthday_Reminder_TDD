@@ -1,5 +1,5 @@
 import pytest
-from dateSub import Date_info
+import dateSub 
 
 with open ("easymonth_test_cases.txt",mode='r') as casefile:
 		res= [tuple(line.strip().split(","))for line in casefile]
@@ -7,5 +7,5 @@ with open ("easymonth_test_cases.txt",mode='r') as casefile:
 
 @pytest.mark.parametrize('date,exp',res)
 def test_easy_cases(date,exp):
-	act=Date_info(date,'15-03-2020')[1]
+	act=dateSub.Subscription(date,'15-03-1995')[1]
 	assert act==exp
