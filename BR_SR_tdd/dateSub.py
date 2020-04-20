@@ -1,115 +1,36 @@
 import datetime
-conditions1={   0 : "Today",
-		7 : "Next Sunday",
-		1 : "Tomorrow",
-		2:"Day after Tomorrow",
-		14:"2 weeks from now",
-		-1:"Yesterday",
-		-2:"Day before Yesterday",
-		-7:"Last Sunday",
-		}
+import date
 
-conditions2={}
-
-def newkeys_conditions1(conditions1):
-	for key in range(3,7):
-		conditions1[key] = "Coming Sunday"
-	for key in range(-6,-2): 
-		conditions1[key] = str((-1*key)) +" days before"
-	for key in range(8,14):
-		conditions1[key] = "Next Sunday"
-	for key in range(-13,-7):
-		conditions1[key] = "In the last week"
-	for key in range(-16,-13):
-		conditions1[key] = "2 weeks ago"
-	return conditions1
+def before_subdates(cdate,sdate):
+	if(cdate.year==2020):
+		month_remained=sdate.month-cdate.month
+	return month_remained
 
 
-
-def newkeys_conditions2(conditions2):
-	for key in range(17,21): 
-		conditions2[key] = "2 weeks ago"
-	for key in range(21,28):
-		conditions2[key] = "3 weeks ago"
-	for key in range(28,31):
-		conditions2[key] = "Almost a month ago"
-	for key in range(31,62):
-		conditions2[key] = "Last month"
-	return conditions2
-
-newkeys_conditions1(conditions1)
-newkeys_conditions2(conditions2)
-def Birth_Date_info(B_date):
-
-	B_date=B_date.split("-")
-	dates_detail=datetime.date(int(2020),int(B_date[1]),int(B_date[0]))
-	day=dates_detail.strftime("%A")
-	month=dates_detail.strftime("%B")
-	return day,month,dates_detail
-
-def Current_date_info(C_date):
-	Current_date=C_date.split("-")
-	C_dates_detail=datetime.date(int(2020),int(Current_date[1]),int(Current_date[0]))
-	C_day=C_dates_detail.strftime("%A")
-	return C_dates_detail,C_day
+def Subscription(C_date,S_date):
+	B_day=date.Date_info(C_date,S_date)
+	C_dateInfo=date.Current_date_info(C_date)
+	S_dateInfo=date.Birth_Date_info(S_date)
 	
-
-def condition_for_same_month(b_day,c_day):
-		
-		return (conditions1[b_day-c_day])
-
-
-
-def condition_for_previous_month(b_day,c_day):	
-			
-		return (conditions2[c_day-b_day])
-
-
-
-def Notification(B_day,C_day):
-	if(B_day.month > C_day.month):
-		return  (str(B_day.month - C_day.month)+" Months from Now")
-
-	elif((B_day.month - C_day.month)< -1 ): 
-		return (str(C_day.month - B_day.month) +" Months Ago")
-
-	else:
-		birth_day=B_day.day
-		current_day=C_day.day
-		if(B_day.month == C_day.month):
-			return condition_for_same_month(birth_day,current_day)
-		else:
-			return condition_for_previous_month(birth_day,current_day+31)
-
-			
-
-def Date_info(date,date_birth):
 	
-	Birth_day=Birth_Date_info(date_birth)
-	Current_date = Current_date_info(date)
-	Birthday_notify=Notification(Birth_day[2],Current_date[0])
-	#return ("On "+day+","+ dates[0],dates_detail.strftime("%B"))
-	print("Birthday : ",Current_date[0]," ",Current_date[1]," ",Birthday_notify,"  ||  ","On ",Birth_day[0],", ",Birth_day[2].day,"th of",Birth_day[1])#collecting subscription information and giving results
-	'''Subscribe_date=date
-	Subscribe_day=Birth_Date_info(Subscribe_date)
-	Current_date = Current_date_info(date)
-	Subscribe_notify=Notification(Subscribe_day[2],Current_date[0])'''
-
 	try:
-		sub_notify=str(12-int(Birthday_notify[0]))+" Months from Now"
+	#if(int(C_dateInfo[0].month)  > int(S_dateInfo[1].month)):
+		S_notify=date.months_display(C_dateInfo[0],S_dateInfo[1])
+		sub_notify=str(12-int(S_notify[0]))+" Months from Now"
 	except ValueError as err:
-		sub_notify="11 Months from Now"
+		sub_notify=str(before_subdates(C_dateInfo[0],S_dateInfo[1]))+" Months from Now"
 	
-	print("Subscription",Current_date[0]," ",Current_date[1]," ",sub_notify,"  ||  ","On ",Birth_day[0],", ",Birth_day[2].day,"th of",Birth_day[1])
-	return Birthday_notify,sub_notify
-	
-	
-	
+	Bday=(str(B_day[5]))
+	#print(sub_notify)
+	print(sub_notify)
+	return Bday,sub_notify
 
+	
 if __name__ == "__main__":
 	dates=input("Enter the date: ")
-	date_birth=input("Enter the birth date: ")
-	Date_info(dates,date_birth)
+	date_Sub=input("Enter the Subscription date: ")
+	Subscription(dates,date_Sub)
+#print("Subscription",C_dateInfo[0]," ",C_dateInfo[1]," ",sub_notify,"  ||  ","On ",S_dateInfo[0],", ",S_dateInfo[1].day,"th of",S_dateInfo[2])
 
 
 
