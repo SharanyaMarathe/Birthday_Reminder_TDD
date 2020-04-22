@@ -42,7 +42,7 @@ newkeys_conditions2(conditions2)
 
 def Birth_Date_info(B_date):
 	B_date=B_date.split("-")
-	dates_detail=datetime.date(int(2020),int(B_date.month),int(B_date.day))
+	dates_detail=datetime.date(int(2020),int(B_date[1]),int(B_date[0]))
 	day=dates_detail.strftime("%A")
 	month=dates_detail.strftime("%B")
 	return day,dates_detail,month
@@ -87,7 +87,8 @@ def Date_info(date,date_birth):
 	
 	Birth_day=Birth_Date_info(date_birth)
 	Current_date = Current_date_info(date)
-	Birthday_notify=Notification(Birth_date,Current_date[0])
+	
+	Birthday_notify=Notification(Birth_day[1],Current_date[0])
 	#return ("On "+day+","+ dates[0],dates_detail.strftime("%B"))
 	print("Birthday : ",Current_date[0]," ",Current_date[1]," ",Birthday_notify,"  ||  ","On ",Birth_day[0],", ",Birth_day[1].day,"th of",Birth_day[2])
 	return Birthday_notify
