@@ -1,7 +1,9 @@
 import pytest
-import dateSub
+import sys
+sys.path.append('../')
+from src import dateSub
 
-with open ("easy_test_cases.txt",mode='r') as case1file:
+with open ("data/easy_test_cases.txt",mode='r') as case1file:
 		res1= [tuple(line.strip().split(","))for line in case1file]
 
 
