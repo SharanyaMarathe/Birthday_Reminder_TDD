@@ -1,7 +1,9 @@
 import pytest
-import dateSub
+import sys
+sys.path.append('../')
+from src import dateSub
 
-with open ("nearby_test_cases.txt",mode='r') as case2file:
+with open ("data/nearby_test_cases.txt",mode='r') as case2file:
 		res2= [tuple(line.strip().split(","))for line in case2file]
 
 @pytest.mark.parametrize('date,exp',res2)
