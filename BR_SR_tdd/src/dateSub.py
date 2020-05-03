@@ -1,13 +1,13 @@
 import datetime
 import sys
 sys.path.append('../')
-from src import date
+from src import date_notify
 
 
 def before_subdates(cdate,sdate):
 	
 		if(sdate.month == cdate.month):
-			due_date=date.condition_for_same_month(sdate.day,cdate.day)
+			due_date=date_notify.condition_for_same_month(sdate.day,cdate.day)
 			return due_date
 		else:
 			month_remained=sdate.month-cdate.month
@@ -21,14 +21,14 @@ def for_year(cdate,sdate):
 		return before_subdates(cdate,sdate)
 
 def Subscription(C_date,S_date):
-	B_day=date.Date_info(C_date,S_date)
-	C_dateInfo=date.Current_date_info(C_date)
-	S_dateInfo=date.Birth_Date_info(S_date)
+	B_day=date_notify.Date_info(C_date,S_date)
+	C_dateInfo=date_notify.Current_date_info(C_date)
+	S_dateInfo=date_notify.Birth_Date_info(S_date)
 	
 	
 
 	if(int(C_dateInfo[0].month)  > int(S_dateInfo[1].month)):
-		S_notify=date.months_display(C_dateInfo[0],S_dateInfo[1])
+		S_notify=date_notify.months_display(C_dateInfo[0],S_dateInfo[1])
 		sub_notify=str(12-int(S_notify[0]))+" Months from Now"
 	else:
 		sub_notify=str(before_subdates(C_dateInfo[0],S_dateInfo[1]))
