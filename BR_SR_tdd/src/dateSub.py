@@ -1,5 +1,8 @@
 import datetime
-import date
+import sys
+sys.path.append('../')
+from src import date
+
 
 def before_subdates(cdate,sdate):
 	
