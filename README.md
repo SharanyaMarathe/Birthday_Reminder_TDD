@@ -1,2 +1,2 @@
 # Birthday_Reminder_TDD
-Birthday Reminder Application with Test Driven Development
+Birthday Reminder and Subscription Reminder Application developed by Test Driven Development Method.
